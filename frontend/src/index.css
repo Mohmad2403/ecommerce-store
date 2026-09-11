@@ -1,0 +1,54 @@
+:root {
+  --bs-primary: #334155;
+  --bs-primary-rgb: 51, 65, 85;
+  --bs-link-color: #334155;
+  --bs-link-hover-color: #1e293b;
+}
+
+.btn-primary {
+  background-color: #334155;
+  border-color: #334155;
+}
+.btn-primary:hover {
+  background-color: #1e293b;
+  border-color: #1e293b;
+}
+.btn-outline-primary {
+  color: #334155;
+  border-color: #334155;
+}
+.btn-outline-primary:hover {
+  background-color: #334155;
+  border-color: #334155;
+}
+.text-primary {
+  color: #334155 !important;
+}
+.bg-primary {
+  background-color: #334155 !important;
+}
+
+.navbar.bg-dark {
+  background-color: #0f172a !important;
+}
+
+body {
+  margin: 0;
+  background-color: #fafafa;
+}
+
+.hover-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn{
+  transition: transform 0.15s ease;
+}
+
+.btn.active{
+  transform: scale(0.97);
+}
