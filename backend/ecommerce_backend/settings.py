@@ -157,10 +157,10 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
     'API_KEY': config('CLOUDINARY_API_KEY', default=''),
