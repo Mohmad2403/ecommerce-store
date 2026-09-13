@@ -23,12 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b(a%=*^o5fmif)e3wxt4geenvb5nws@gy0%bii)m2h)-2p$vy^'
-
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-b(a%=*^o5fmif)e3wxt4geenvb5nws@gy0%bii)m2h)-2p$vy^')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=True, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(',')
 
 
 # Application definition
@@ -39,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'rest_framework',
     'corsheaders',
     'accounts',
@@ -60,6 +60,7 @@ AUTH_USER_MODEL='accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -96,15 +97,22 @@ WSGI_APPLICATION = 'ecommerce_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.mysql',
+   #    'USER':'root',
+    #    'PASSWORD':'5426',
+     #   'HOST':'localhost',
+      #  'PORT':'3306',
+   # }
+#}
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecommerce_backend_db',
-        'USER':'root',
-        'PASSWORD':'5426',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
+    'default': dj_database_url.config(
+        default=f"mysql://root:5426@localhost:3306/ecommerce_backend_db",
+        conn_max_age=600,
+    )
 }
 
 
@@ -143,9 +151,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
-MEDIA_URL='/media/'
-MEDIA_ROOT=BASE_DIR/'media'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
+    'API_KEY': config('CLOUDINARY_API_KEY', default=''),
+    'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
@@ -164,5 +187,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SIMPLE_JWT={
     'ACCESS_TOKEN_LIFETIME':timedelta(hours=1),
-    'REFRESH-TOKEN-LIFETIME':timedelta(days=7)
+    'REFRESH_TOKEN_LIFETIME':timedelta(days=7)
 }
