@@ -1,7 +1,16 @@
 import axios from 'axios'
 
-const rawBaseURL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/'
-const baseURL = rawBaseURL.endsWith('/') ? rawBaseURL : `${rawBaseURL}/`
+let rawBaseURL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/'
+
+// Strip any trailing slashes
+rawBaseURL = rawBaseURL.replace(/\/+$/, '')
+
+// Ensure /api is appended if user only entered the root domain
+if (!rawBaseURL.endsWith('/api')) {
+    rawBaseURL = `${rawBaseURL}/api`
+}
+
+const baseURL = `${rawBaseURL}/`
 
 const api = axios.create({
     baseURL
