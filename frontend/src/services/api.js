@@ -1,13 +1,16 @@
-import axious from 'axios'
+import axios from 'axios'
 
-const api=axious.create({
-    baseURL:'http://127.0.0.1:8000/api/'
+const rawBaseURL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/'
+const baseURL = rawBaseURL.endsWith('/') ? rawBaseURL : `${rawBaseURL}/`
+
+const api = axios.create({
+    baseURL
 })
 
-api.interceptors.request.use((config)=>{
-    const token=localStorage.getItem('access_token')
-    if (token){
-        config.headers.Authorization=`Bearer ${token}`
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('access_token')
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
     }
     return config
 })
