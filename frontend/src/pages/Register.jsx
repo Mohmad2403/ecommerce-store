@@ -33,10 +33,10 @@ function Register() {
   }
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+    <div className="d-flex align-items-center justify-content-center py-4 px-3" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
       <div className="card shadow-lg border-0 overflow-hidden" style={{ maxWidth: '900px', width: '100%' }}>
         <div className="row g-0">
-          <div className="col-md-5 p-4" style={{ backgroundColor: '#fef3e7' }}>
+          <div className="col-md-5 p-4 d-none d-md-block" style={{ backgroundColor: '#fef3e7' }}>
             <Link to="/" className="text-decoration-none fw-bold fs-4 mb-4 d-block" style={{ color: '#ea580c' }}>🛍️ MyShop</Link>
             <p className="text-muted small mb-1">Shop Smarter, Live Better</p>
             <h2 className="fw-bold mb-3">Your Favorite Products, All in One Place</h2>
@@ -69,9 +69,10 @@ function Register() {
             </div>
           </div>
 
-          <div className="col-md-7 p-5">
-            <div className="d-flex justify-content-end mb-3">
-                <span className="text-muted small">Already have an account? <Link to="/login" className="fw-semibold text-decoration-none" style={{ color: '#ea580c' }}>Log In</Link></span>
+          <div className="col-12 col-md-7 p-4 p-md-5">
+            <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <Link to="/" className="text-decoration-none fw-bold fs-4 d-md-none" style={{ color: '#ea580c' }}>🛍️ MyShop</Link>
+                <span className="text-muted small ms-auto">Already have an account? <Link to="/login" className="fw-semibold text-decoration-none" style={{ color: '#ea580c' }}>Log In</Link></span>
             </div>
             <h3 className="fw-bold mb-1">Create Your Account</h3>
             <p className="text-muted mb-4">Join MyShop and get access to exclusive deals, personalized recommendations and more.</p>

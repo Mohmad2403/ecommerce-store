@@ -31,10 +31,10 @@ function Login() {
   }
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+    <div className="d-flex align-items-center justify-content-center py-4 px-3" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
       <div className="card shadow-lg border-0 overflow-hidden" style={{ maxWidth: '900px', width: '100%' }}>
         <div className="row g-0">
-          <div className="col-md-5 p-4" style={{ backgroundColor: '#fef3e7' }}>
+          <div className="col-md-5 p-4 d-none d-md-block" style={{ backgroundColor: '#fef3e7' }}>
             <Link to="/" className="text-decoration-none fw-bold fs-4 mb-4 d-block" style={{ color: '#ea580c' }}>🛍️ MyShop</Link>
             <p className="text-muted small mb-1">Shop Smarter, Live Better</p>
             <h2 className="fw-bold mb-3">Your Favorite Products, All in One Place</h2>
@@ -67,9 +67,10 @@ function Login() {
             </div>
           </div>
 
-          <div className="col-md-7 p-5">
-            <div className="d-flex justify-content-end mb-3">
-                <span className="text-muted small">Don't have an account? <Link to="/register" className="fw-semibold text-decoration-none" style={{ color: '#ea580c' }}>Sign Up</Link></span>
+          <div className="col-12 col-md-7 p-4 p-md-5">
+            <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <Link to="/" className="text-decoration-none fw-bold fs-4 d-md-none" style={{ color: '#ea580c' }}>🛍️ MyShop</Link>
+                <span className="text-muted small ms-auto">Don't have an account? <Link to="/register" className="fw-semibold text-decoration-none" style={{ color: '#ea580c' }}>Sign Up</Link></span>
             </div>
             <h3 className="fw-bold mb-1">Welcome Back!</h3>
             <p className="text-muted mb-4">Log in to your account to continue shopping and explore amazing deals.</p>
