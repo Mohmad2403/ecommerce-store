@@ -48,50 +48,52 @@ function AdminOrders() {
                 {orders.length === 0 ? (
                     <p>No orders yet.</p>
                 ) : (
-                    <table className="table table-bordered align-middle">
-                        <thead>
-                            <tr>
-                                <th>Order #</th>
-                                <th>Customer</th>
-                                <th>Items</th>
-                                <th>Total</th>
-                                <th>Paid</th>
-                                <th>Status</th>
-                                <th>Placed On</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orders.map((order) => (
-                                <tr key={order.id}>
-                                    <td>#{order.id}</td>
-                                    <td>{order.username}</td>
-                                    <td>
-                                        {order.items.map((item) => (
-                                            <div key={item.id}>{item.product_detail.name} x {item.quantity}</div>
-                                        ))}
-                                    </td>
-                                    <td>Rs. {order.total_amount}</td>
-                                    <td>
-                                        <span className={`badge ${order.is_paid ? 'bg-success' : 'bg-secondary'}`}>
-                                            {order.is_paid ? 'Paid' : 'Unpaid'}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <select
-                                            className="form-select form-select-sm"
-                                            value={order.status}
-                                            onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                                        >
-                                            {statusOptions.map((s) => (
-                                                <option key={s} value={s}>{s}</option>
-                                            ))}
-                                        </select>
-                                    </td>
-                                    <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                    <div className="table-responsive">
+                        <table className="table table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Customer</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Paid</th>
+                                    <th>Status</th>
+                                    <th>Placed On</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {orders.map((order) => (
+                                    <tr key={order.id}>
+                                        <td>#{order.id}</td>
+                                        <td>{order.username}</td>
+                                        <td>
+                                            {order.items.map((item) => (
+                                                <div key={item.id}>{item.product_detail.name} x {item.quantity}</div>
+                                            ))}
+                                        </td>
+                                        <td>Rs. {order.total_amount}</td>
+                                        <td>
+                                            <span className={`badge ${order.is_paid ? 'bg-success' : 'bg-secondary'}`}>
+                                                {order.is_paid ? 'Paid' : 'Unpaid'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <select
+                                                className="form-select form-select-sm"
+                                                value={order.status}
+                                                onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                                            >
+                                                {statusOptions.map((s) => (
+                                                    <option key={s} value={s}>{s}</option>
+                                                ))}
+                                            </select>
+                                        </td>
+                                        <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
             </div>
         </>

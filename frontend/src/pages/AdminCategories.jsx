@@ -76,37 +76,41 @@ function AdminCategories() {
                 <div className="card mb-4">
                     <div className="card-body">
                         <h5 className="mb-3">{editingCategoryId ? 'Edit Category' : 'Add New Category'}</h5>
-                        <form onSubmit={handleCategorySubmit} className="d-flex gap-2">
+                        <form onSubmit={handleCategorySubmit} className="d-flex flex-column flex-sm-row gap-2">
                             <input className="form-control" placeholder="Category Name" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} required />
-                            <button className="btn btn-primary" type="submit">{editingCategoryId ? 'Update' : 'Add'}</button>
-                            {editingCategoryId && (
-                                <button className="btn btn-secondary" type="button" onClick={() => { setCategoryName(''); setEditingCategoryId(null) }}>Cancel</button>
-                            )}
+                            <div className="d-flex gap-2">
+                                <button className="btn btn-primary text-nowrap" type="submit">{editingCategoryId ? 'Update' : 'Add'}</button>
+                                {editingCategoryId && (
+                                    <button className="btn btn-secondary text-nowrap" type="button" onClick={() => { setCategoryName(''); setEditingCategoryId(null) }}>Cancel</button>
+                                )}
+                            </div>
                         </form>
                     </div>
                 </div>
 
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {categories.map((cat) => (
-                            <tr key={cat.id}>
-                                <td>{cat.name}</td>
-                                <td>{cat.slug}</td>
-                                <td>
-                                    <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleCategoryEdit(cat)}>Edit</button>
-                                    <button className="btn btn-sm btn-outline-danger" onClick={() => handleCategoryDelete(cat.id)}>Delete</button>
-                                </td>
+                <div className="table-responsive">
+                    <table className="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {categories.map((cat) => (
+                                <tr key={cat.id}>
+                                    <td>{cat.name}</td>
+                                    <td>{cat.slug}</td>
+                                    <td>
+                                        <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleCategoryEdit(cat)}>Edit</button>
+                                        <button className="btn btn-sm btn-outline-danger" onClick={() => handleCategoryDelete(cat.id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     )

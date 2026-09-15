@@ -19,7 +19,7 @@ function Footer() {
         <footer className="text-white pt-5 pb-4" style={{ backgroundColor: '#0f172a' }}>
             <div className="container">
                 <div className="row g-4">
-                    <div className="col-md-3">
+                    <div className="col-12 col-md-3">
                         <h5 className="mb-3">🛍️ MyShop</h5>
                         <p className="text-white-50 small">Shop the latest products online with best quality and great prices only on MyShop.</p>
                         <div className="d-flex gap-3 mt-3">
@@ -29,7 +29,7 @@ function Footer() {
                             <i className="bi bi-youtube fs-5"></i>
                         </div>
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-6 col-md-2">
                         <h6 className="mb-3">Quick Links</h6>
                         <ul className="list-unstyled small">
                             <li className="mb-2"><Link to="/" className="text-white-50 text-decoration-none">About Us</Link></li>
@@ -40,7 +40,7 @@ function Footer() {
                             <li><span className="text-white-50">Terms & Conditions</span></li>
                         </ul>
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-6 col-md-2">
                         <h6 className="mb-3">Customer Service</h6>
                         <ul className="list-unstyled small">
                             <li className="mb-2"><span className="text-white-50">Track Order</span></li>
@@ -51,7 +51,7 @@ function Footer() {
                             <li><span className="text-white-50">Help Center</span></li>
                         </ul>
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-6 col-md-2">
                         <h6 className="mb-3">Categories</h6>
                         <ul className="list-unstyled small">
                             {categories.length > 0 ? (
@@ -67,7 +67,7 @@ function Footer() {
                             )}
                         </ul>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-12 col-md-3">
                         <h6 className="mb-3">Download Our App</h6>
                         <div className="d-flex flex-column gap-2">
                             <div className="bg-black border border-secondary rounded px-3 py-2 d-flex align-items-center gap-2" style={{ width: 'fit-content' }}>

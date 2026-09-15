@@ -20,6 +20,7 @@ function Products() {
     const [sortBy, setSortBy] = useState('popularity')
     const [viewMode, setViewMode] = useState('grid')
     const [currentPage, setCurrentPage] = useState(1)
+    const [showFilters, setShowFilters] = useState(false)
     const itemsPerPage = 12
 
     useEffect(() => {
@@ -137,7 +138,14 @@ function Products() {
                 </nav>
 
                 <div className="row">
-                    <div className="col-lg-3 mb-4">
+                    <div className="col-12 d-lg-none mb-3">
+                        <button className="btn btn-outline-secondary w-100 d-flex justify-content-between align-items-center" onClick={() => setShowFilters(!showFilters)}>
+                            <span><i className="bi bi-funnel"></i> Filters & Categories {categoryFilter ? '(1 Active)' : ''}</span>
+                            <i className={`bi bi-chevron-${showFilters ? 'up' : 'down'}`}></i>
+                        </button>
+                    </div>
+
+                    <div className={`col-lg-3 mb-4 ${showFilters ? 'd-block' : 'd-none d-lg-block'}`}>
                         <div className="card shadow-sm p-3 mb-3">
                             <h6 className="fw-bold mb-2">Categories</h6>
                             <div
@@ -198,11 +206,11 @@ function Products() {
                     <div className="col-lg-9">
                         <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                             <div>
-                                <h2 className="fw-bold mb-0">All Products</h2>
+                                <h2 className="fw-bold mb-0 fs-3 fs-md-2">All Products</h2>
                                 <p className="text-muted small mb-0">Showing {paginatedProducts.length ? (currentPage - 1) * itemsPerPage + 1 : 0}–{Math.min(currentPage * itemsPerPage, filteredProducts.length)} of {filteredProducts.length} products</p>
                             </div>
-                            <div className="d-flex gap-2 align-items-center">
-                                <select className="form-select form-select-sm" style={{ width: '160px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                            <div className="d-flex gap-2 align-items-center ms-auto">
+                                <select className="form-select form-select-sm" style={{ width: '150px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                                     <option value="popularity">Popularity</option>
                                     <option value="price_low">Price: Low to High</option>
                                     <option value="price_high">Price: High to Low</option>
@@ -221,37 +229,37 @@ function Products() {
                         {paginatedProducts.length === 0 ? (
                             <p>No products found.</p>
                         ) : (
-                            <div className={viewMode === 'grid' ? 'row' : ''}>
+                            <div className={viewMode === 'grid' ? 'row g-3' : ''}>
                                 {paginatedProducts.map((product) => {
                                     const discount = getDiscount(product.id)
                                     const originalPrice = getOriginalPrice(product.price, discount)
                                     return viewMode === 'grid' ? (
-                                        <div className="col-md-4 mb-4" key={product.id}>
+                                        <div className="col-6 col-md-4 mb-3" key={product.id}>
                                             <div className="card hover-card h-100">
                                                 <Link to={`/products/${product.id}`} className="text-decoration-none text-dark">
                                                     {product.image && (
-                                                        <img src={product.image} className="card-img-top p-3" alt={product.name} style={{ height: '220px', objectFit: 'contain' }} />
+                                                        <img src={product.image} className="card-img-top p-2 p-md-3" alt={product.name} style={{ height: '160px', objectFit: 'contain' }} />
                                                     )}
-                                                    <div className="card-body pb-0">
-                                                        <h6 className="card-title">{product.name}</h6>
+                                                    <div className="card-body pb-0 px-2 px-md-3">
+                                                        <h6 className="card-title small mb-1 text-truncate" title={product.name}>{product.name}</h6>
                                                     </div>
                                                 </Link>
-                                                <div className="card-body pt-0">
+                                                <div className="card-body pt-0 px-2 px-md-3">
                                                     <StarRating productId={product.id} showCount={true} />
-                                                    <p className="mb-1">
+                                                    <p className="mb-1 small">
                                                         <span className="fw-bold">Rs. {product.price}</span>{' '}
-                                                        <span className="text-muted text-decoration-line-through small">Rs. {originalPrice}</span>{' '}
-                                                        <span className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b' }}>{discount}% OFF</span>
+                                                        <span className="text-muted text-decoration-line-through d-none d-sm-inline">Rs. {originalPrice}</span>{' '}
+                                                        <span className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b' }}>{discount}%</span>
                                                     </p>
                                                     <span className="badge mb-2" style={{ backgroundColor: product.stock > 0 ? '#dcfce7' : '#fee2e2', color: product.stock > 0 ? '#166534' : '#991b1b' }}>
                                                         {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
                                                     </span>
-                                                    <div className="d-flex gap-2 mt-2">
-                                                        <button className="btn btn-sm flex-fill" style={{color:'white',border:'1px solid #ea580c',backgroundColor:'#ea580c'}} onClick={() => handleAddToCart(product.id)} disabled={product.stock === 0}>
+                                                    <div className="d-flex gap-1 mt-2 flex-wrap">
+                                                        <button className="btn btn-sm flex-fill" style={{color:'white',border:'1px solid #ea580c',backgroundColor:'#ea580c', fontSize: '12px'}} onClick={() => handleAddToCart(product.id)} disabled={product.stock === 0}>
                                                             <i className="bi bi-cart"></i> Cart
                                                         </button>
-                                                        <button className="btn btn-sm flex-fill"style={{color:'#16a34a',border:'1px solid #16a34a',backgroundColor:'white'}} onClick={() => handleBuyNow(product.id)} disabled={product.stock === 0}>
-                                                            Buy Now
+                                                        <button className="btn btn-sm flex-fill d-none d-sm-block" style={{color:'#16a34a',border:'1px solid #16a34a',backgroundColor:'white', fontSize: '12px'}} onClick={() => handleBuyNow(product.id)} disabled={product.stock === 0}>
+                                                            Buy
                                                         </button>
                                                         <button className="btn btn-outline-danger btn-sm" onClick={() => handleAddToWishlist(product.id)}>
                                                             <i className="bi bi-heart"></i>
@@ -262,30 +270,30 @@ function Products() {
                                         </div>
                                     ) : (
                                         <div className="card hover-card mb-3" key={product.id}>
-                                            <div className="row g-0 align-items-center">
-                                                <div className="col-md-2">
+                                            <div className="row g-0 align-items-center p-2">
+                                                <div className="col-4 col-sm-3 col-md-2 text-center">
                                                     <Link to={`/products/${product.id}`}>
                                                         {product.image && (
-                                                            <img src={product.image} className="img-fluid p-2" alt={product.name} style={{ height: '120px', objectFit: 'contain', width: '100%' }} />
+                                                            <img src={product.image} className="img-fluid" alt={product.name} style={{ maxHeight: '100px', objectFit: 'contain' }} />
                                                         )}
                                                     </Link>
                                                 </div>
-                                                <div className="col-md-6">
-                                                    <div className="card-body">
+                                                <div className="col-8 col-sm-9 col-md-6 ps-2">
+                                                    <div className="card-body p-1">
                                                         <Link to={`/products/${product.id}`} className="text-decoration-none text-dark">
-                                                            <h6 className="card-title">{product.name}</h6>
+                                                            <h6 className="card-title mb-1">{product.name}</h6>
                                                         </Link>
                                                         <StarRating productId={product.id} showCount={true} />
-                                                        <p className="text-muted small mb-0">{product.description?.slice(0, 80)}</p>
+                                                        <p className="text-muted small mb-0 d-none d-sm-block">{product.description?.slice(0, 80)}</p>
                                                     </div>
                                                 </div>
-                                                <div className="col-md-2">
+                                                <div className="col-6 col-md-2 mt-2 mt-md-0 ps-2 ps-md-0">
                                                     <p className="fw-bold mb-0">Rs. {product.price}</p>
                                                     <p className="text-muted text-decoration-line-through small mb-0">Rs. {originalPrice}</p>
                                                     <span className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b' }}>{discount}% OFF</span>
                                                 </div>
-                                                <div className="col-md-2 d-flex flex-column gap-1 p-2">
-                                                    <button className="btn btn-primary btn-sm" onClick={() => handleAddToCart(product.id)} disabled={product.stock === 0}>Add to Cart</button>
+                                                <div className="col-6 col-md-2 mt-2 mt-md-0 d-flex flex-column gap-1 pe-2">
+                                                    <button className="btn btn-sm text-white" style={{ backgroundColor: '#ea580c' }} onClick={() => handleAddToCart(product.id)} disabled={product.stock === 0}>Add to Cart</button>
                                                     <button className="btn btn-outline-danger btn-sm" onClick={() => handleAddToWishlist(product.id)}>Wishlist</button>
                                                 </div>
                                             </div>

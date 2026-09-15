@@ -162,32 +162,32 @@ function ProductDetail() {
                             <button className="btn btn-outline-secondary" onClick={() => setQuantity(q => Math.min(product.stock, q + 1))}>+</button>
                         </div>
 
-                        <div className="d-flex gap-2 mb-4">
-                            <button className="btn text-white flex-fill" style={{ backgroundColor: '#ea580c' }} onClick={handleAddToCart} disabled={product.stock === 0}>
+                        <div className="d-flex gap-2 mb-4 flex-wrap flex-sm-nowrap">
+                            <button className="btn text-white flex-fill py-2" style={{ backgroundColor: '#ea580c', minWidth: '130px' }} onClick={handleAddToCart} disabled={product.stock === 0}>
                                 <i className="bi bi-cart"></i> Add to Cart
                             </button>
-                            <button className="btn btn-outline-success flex-fill" onClick={handleBuyNow} disabled={product.stock === 0}>
+                            <button className="btn btn-outline-success flex-fill py-2" style={{ minWidth: '130px' }} onClick={handleBuyNow} disabled={product.stock === 0}>
                                 <i className="bi bi-lightning-fill"></i> Buy Now
                             </button>
-                            <button className="btn btn-outline-danger" onClick={handleAddToWishlist}>
+                            <button className="btn btn-outline-danger py-2" onClick={handleAddToWishlist} title="Add to Wishlist">
                                 <i className="bi bi-heart"></i>
                             </button>
                         </div>
 
                         <div className="row text-center g-2 p-3 shadow-sm rounded" style={{ backgroundColor: '#f8f9fa' }}>
-                            <div className="col-3">
+                            <div className="col-6 col-sm-3 mb-2 mb-sm-0">
                                 <i className="bi bi-arrow-repeat fs-4 text-primary"></i>
                                 <p className="small mb-0 mt-1">7 Days<br />Easy Returns</p>
                             </div>
-                            <div className="col-3">
+                            <div className="col-6 col-sm-3 mb-2 mb-sm-0">
                                 <i className="bi bi-award fs-4 text-primary"></i>
                                 <p className="small mb-0 mt-1">1 Year<br />Warranty</p>
                             </div>
-                            <div className="col-3">
+                            <div className="col-6 col-sm-3">
                                 <i className="bi bi-patch-check fs-4 text-primary"></i>
                                 <p className="small mb-0 mt-1">100% Original<br />Product</p>
                             </div>
-                            <div className="col-3">
+                            <div className="col-6 col-sm-3">
                                 <i className="bi bi-shield-lock fs-4 text-primary"></i>
                                 <p className="small mb-0 mt-1">Secure<br />Payment</p>
                             </div>

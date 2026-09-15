@@ -44,8 +44,8 @@ function Navbar() {
     return (
         <>
             <TopBar />
-            <nav className="navbar navbar-expand-lg bg-white px-4 py-3 sticky-top shadow-sm">
-                <Link className="navbar-brand fw-bold fs-3" to="/" style={{ color: '#ea580c' }}>
+            <nav className="navbar navbar-expand-lg bg-white px-2 px-md-4 py-2 py-md-3 sticky-top shadow-sm">
+                <Link className="navbar-brand fw-bold fs-4 fs-md-3" to="/" style={{ color: '#ea580c' }}>
                     🛍️ MyShop
                 </Link>
 
@@ -64,7 +64,7 @@ function Navbar() {
                     </div>
                 </form>
 
-                <div className="d-flex align-items-center gap-4">
+                <div className="d-flex align-items-center gap-2 gap-sm-3 gap-md-4">
                     <Link className="text-dark position-relative" to="/wishlist" title="Wishlist">
                         <i className="bi bi-heart fs-5"></i>
                         {wishlistCount > 0 && (
@@ -106,6 +106,23 @@ function Navbar() {
                     )}
                 </div>
             </nav>
+
+            <div className="d-md-none px-3 py-2 bg-white border-bottom shadow-sm">
+                <form onSubmit={handleSearch}>
+                    <div className="input-group input-group-sm">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search products, brands..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <button className="btn text-white" style={{ backgroundColor: '#ea580c' }} type="submit">
+                            <i className="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
 
             <div className="d-none d-md-flex justify-content-center gap-4 py-2 border-bottom bg-white small">
                 <Link to="/" className="text-decoration-none text-dark fw-semibold">Home</Link>

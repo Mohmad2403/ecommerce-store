@@ -153,31 +153,33 @@ function AdminProducts() {
                     </div>
                 </div>
 
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product.id}>
-                                <td>{product.name}</td>
-                                <td>{categories.find(c => c.id === product.category)?.name || '-'}</td>
-                                <td>Rs. {product.price}</td>
-                                <td>{product.stock}</td>
-                                <td>
-                                    <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(product)}>Edit</button>
-                                    <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(product.id)}>Delete</button>
-                                </td>
+                <div className="table-responsive">
+                    <table className="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <tr key={product.id}>
+                                    <td>{product.name}</td>
+                                    <td>{categories.find(c => c.id === product.category)?.name || '-'}</td>
+                                    <td>Rs. {product.price}</td>
+                                    <td>{product.stock}</td>
+                                    <td>
+                                        <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(product)}>Edit</button>
+                                        <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(product.id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     )

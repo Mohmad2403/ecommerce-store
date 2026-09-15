@@ -122,12 +122,12 @@ function Orders() {
 
                                     <div className="row g-2 mb-3">
                                         {order.items.map((item) => (
-                                            <div className="col-auto d-flex align-items-center gap-2 border rounded p-2" key={item.id}>
+                                            <div className="col-12 col-sm-auto d-flex align-items-center gap-2 border rounded p-2" key={item.id}>
                                                 {item.product_detail.image && (
                                                     <img src={item.product_detail.image} alt={item.product_detail.name} style={{ width: '45px', height: '45px', objectFit: 'contain' }} />
                                                 )}
-                                                <div>
-                                                    <p className="small mb-0">{item.product_detail.name}</p>
+                                                <div className="text-truncate">
+                                                    <p className="small mb-0 text-truncate">{item.product_detail.name}</p>
                                                     <p className="text-muted small mb-0">Qty: {item.quantity}</p>
                                                 </div>
                                             </div>

@@ -99,9 +99,11 @@ function Profile() {
                         </div>
 
                         <div className="col-lg-9">
-                            <div className="card shadow-sm p-4 mb-4">
-                                <div className="d-flex flex-wrap align-items-center gap-4">
-                                    <i className="bi bi-person-circle" style={{ fontSize: '80px', color: '#fbbf9f' }}></i>
+                            <div className="card shadow-sm p-3 p-md-4 mb-4">
+                                <div className="d-flex flex-wrap align-items-center gap-3 gap-md-4 text-center text-sm-start">
+                                    <div className="mx-auto mx-sm-0">
+                                        <i className="bi bi-person-circle" style={{ fontSize: '70px', color: '#fbbf9f' }}></i>
+                                    </div>
                                     <div className="flex-grow-1">
                                         <h4 className="fw-bold mb-1">{user.username}</h4>
                                         <p className="text-muted mb-1"><i className="bi bi-envelope"></i> {user.email || 'Not set'}</p>
@@ -110,14 +112,14 @@ function Profile() {
                                             <i className="bi bi-calendar3"></i> Member since {new Date(user.date_joined).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}
                                         </p>
                                     </div>
-                                    <div className="d-flex gap-3">
-                                        <div className="text-center p-3 rounded" style={{ backgroundColor: '#eef2ff' }}>
+                                    <div className="d-flex gap-2 gap-sm-3 w-100 w-sm-auto justify-content-center">
+                                        <div className="text-center p-3 rounded flex-fill" style={{ backgroundColor: '#eef2ff' }}>
                                             <h4 className="fw-bold mb-0" style={{ color: '#4f46e5' }}>{orders.length}</h4>
-                                            <p className="small text-muted mb-0">Orders Placed</p>
+                                            <p className="small text-muted mb-0">Orders</p>
                                         </div>
-                                        <div className="text-center p-3 rounded" style={{ backgroundColor: '#dcfce7' }}>
+                                        <div className="text-center p-3 rounded flex-fill" style={{ backgroundColor: '#dcfce7' }}>
                                             <h4 className="fw-bold mb-0 text-success">{wishlistCount}</h4>
-                                            <p className="small text-muted mb-0">Wishlist Items</p>
+                                            <p className="small text-muted mb-0">Wishlist</p>
                                         </div>
                                     </div>
                                 </div>

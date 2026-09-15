@@ -103,17 +103,17 @@ function Home() {
                 <div className="carousel-inner">
                     {heroSlides.map((slide, index) => (
                         <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                            <div className="px-4 py-5" style={{ backgroundColor: '#fef3e7', minHeight: '450px' }}>
+                            <div className="px-3 px-md-4 py-4 py-md-5" style={{ backgroundColor: '#fef3e7', minHeight: '380px' }}>
                                 <div className="container h-100">
-                                    <div className="row align-items-center h-100">
-                                        <div className="col-md-6">
+                                    <div className="row align-items-center h-100 g-4">
+                                        <div className="col-12 col-md-6 text-center text-md-start">
                                             <p className="fw-semibold mb-2" style={{ color: '#ea580c' }}>{slide.tag}</p>
-                                            <h1 className="display-4 fw-bold mb-3">{slide.title}</h1>
-                                            <p className="text-muted fs-5 mb-4">{slide.subtitle}</p>
-                                            <Link to="/products" className="btn btn-lg text-white" style={{ backgroundColor: '#ea580c' }}>Shop Now</Link>
+                                            <h1 className="fw-bold mb-3 fs-2 fs-md-1">{slide.title}</h1>
+                                            <p className="text-muted fs-6 fs-md-5 mb-4">{slide.subtitle}</p>
+                                            <Link to="/products" className="btn text-white px-4 py-2" style={{ backgroundColor: '#ea580c' }}>Shop Now</Link>
                                         </div>
-                                        <div className="col-md-6 text-center">
-                                            <img src={slide.image} alt={slide.title} className="img-fluid rounded" style={{ maxHeight: '350px', objectFit: 'cover' }} />
+                                        <div className="col-12 col-md-6 text-center">
+                                            <img src={slide.image} alt={slide.title} className="img-fluid rounded" style={{ maxHeight: '280px', objectFit: 'cover', width: '100%', maxWidth: '420px' }} />
                                         </div>
                                     </div>
                                 </div>
@@ -130,20 +130,20 @@ function Home() {
             </div>
 
             {/* SHOP BY CATEGORY */}
-            <div className="container mt-5">
+            <div className="container mt-4 mt-md-5">
                 {error && <div className="alert alert-danger">{error}</div>}
                 <h3 className="text-center fw-bold mb-4">— Shop by Category —</h3>
                 <div className="row g-3 justify-content-center mb-5">
                     {categories.map((cat) => {
                         const style = categoryIcons[cat.name] || { icon: 'bi-grid', bg: '#f1f5f9' }
                         return (
-                            <div className="col-6 col-md-2 text-center" key={cat.id}>
+                            <div className="col-4 col-sm-3 col-md-2 text-center" key={cat.id}>
                                 <Link to={`/products?category=${cat.id}`} className="text-decoration-none">
                                     <div className="hover-card d-flex align-items-center justify-content-center mx-auto mb-2"
-                                        style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: style.bg }}>
-                                        <i className={`bi ${style.icon} fs-3`} style={{ color: '#334155' }}></i>
+                                        style={{ width: '65px', height: '65px', borderRadius: '50%', backgroundColor: style.bg }}>
+                                        <i className={`bi ${style.icon} fs-4`} style={{ color: '#334155' }}></i>
                                     </div>
-                                    <p className="text-dark small mb-0">{cat.name}</p>
+                                    <p className="text-dark small mb-0 text-truncate">{cat.name}</p>
                                 </Link>
                             </div>
                         )
@@ -316,9 +316,9 @@ function Home() {
                 <div className="container">
                     <h4 className="mb-2">Subscribe to our Newsletter</h4>
                     <p className="mb-4">Get the latest updates on new arrivals, deals and exclusive offers</p>
-                    <form className="d-flex justify-content-center gap-2" style={{ maxWidth: '450px', margin: '0 auto' }} onSubmit={(e) => { e.preventDefault(); toast.success('Subscribed! (demo only)') }}>
+                    <form className="d-flex flex-column flex-sm-row justify-content-center gap-2" style={{ maxWidth: '450px', margin: '0 auto' }} onSubmit={(e) => { e.preventDefault(); toast.success('Subscribed! (demo only)') }}>
                         <input type="email" className="form-control" placeholder="Enter your email address" required />
-                        <button className="btn btn-dark" type="submit">Subscribe</button>
+                        <button className="btn btn-dark text-nowrap" type="submit">Subscribe</button>
                     </form>
                 </div>
             </div>

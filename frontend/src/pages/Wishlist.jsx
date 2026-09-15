@@ -92,15 +92,15 @@ function Wishlist() {
                 {items.length === 0 ? (
                     <p>Your wishlist is empty.</p>
                 ) : (
-                    <div className="row">
+                    <div className="row g-2 g-md-3">
                         {items.map((item) => {
                             const discount = getDiscount(item.product)
                             const originalPrice = getOriginalPrice(item.product_detail.price, discount)
                             return (
-                                <div className="col-md-3 mb-4" key={item.id}>
+                                <div className="col-6 col-md-4 col-lg-3 mb-3" key={item.id}>
                                     <div className="card hover-card h-100 border-0 shadow-sm position-relative">
                                         <button
-                                            className="btn btn-sm position-absolute top-0 end-0 m-2 bg-white rounded-circle"
+                                            className="btn btn-sm position-absolute top-0 end-0 m-1 m-md-2 bg-white rounded-circle shadow-sm"
                                             style={{ zIndex: 1 }}
                                             onClick={() => handleRemove(item.id)}
                                             title="Remove from wishlist"
@@ -108,22 +108,22 @@ function Wishlist() {
                                             <i className="bi bi-heart-fill text-danger"></i>
                                         </button>
                                         {item.product_detail.image && (
-                                            <img src={item.product_detail.image} className="card-img-top p-3" alt={item.product_detail.name} style={{ height: '200px', objectFit: 'contain' }} />
+                                            <img src={item.product_detail.image} className="card-img-top p-2 p-md-3" alt={item.product_detail.name} style={{ height: '150px', objectFit: 'contain' }} />
                                         )}
-                                        <div className="card-body">
-                                            <h6 className="card-title mb-1">{item.product_detail.name}</h6>
-                                            <p className="text-muted small mb-1">{item.product_detail.description?.slice(0, 30)}</p>
+                                        <div className="card-body p-2 p-md-3">
+                                            <h6 className="card-title mb-1 small text-truncate" title={item.product_detail.name}>{item.product_detail.name}</h6>
+                                            <p className="text-muted small mb-1 d-none d-sm-block">{item.product_detail.description?.slice(0, 30)}</p>
                                             <StarRating productId={item.product} showCount={true} />
-                                            <p className="mb-3">
-                                                <span className="fw-bold fs-5">Rs. {item.product_detail.price}</span>{' '}
-                                                <span className="text-muted text-decoration-line-through small">Rs. {originalPrice}</span>{' '}
-                                                <span className="small fw-semibold" style={{ color: '#ea580c' }}>{discount}% OFF</span>
+                                            <p className="mb-2 mb-md-3 small">
+                                                <span className="fw-bold">Rs. {item.product_detail.price}</span>{' '}
+                                                <span className="text-muted text-decoration-line-through d-none d-sm-inline">Rs. {originalPrice}</span>{' '}
+                                                <span className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b', fontSize: '10px' }}>{discount}%</span>
                                             </p>
-                                            <div className="d-flex gap-2">
-                                                <button className="btn btn-flex-fill flex-fill text-white" style={{ backgroundColor: '#ea580c' }} onClick={() => handleAddToCart(item.product)}>
-                                                    <i className="bi bi-cart"></i> Add to Cart
+                                            <div className="d-flex gap-1 gap-md-2">
+                                                <button className="btn btn-sm flex-fill text-white" style={{ backgroundColor: '#ea580c', fontSize: '12px' }} onClick={() => handleAddToCart(item.product)}>
+                                                    <i className="bi bi-cart"></i> Cart
                                                 </button>
-                                                <button className="btn btn-outline-secondary" onClick={() => handleRemove(item.id)} title="Delete">
+                                                <button className="btn btn-sm btn-outline-secondary" onClick={() => handleRemove(item.id)} title="Delete">
                                                     <i className="bi bi-trash"></i>
                                                 </button>
                                             </div>

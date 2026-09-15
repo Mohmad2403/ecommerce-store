@@ -124,7 +124,8 @@ function Cart() {
                 ) : (
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="table-responsive mb-3">
+                            {/* Desktop Table View */}
+                            <div className="table-responsive mb-3 d-none d-md-block">
                                 <table className="table align-middle">
                                     <thead>
                                         <tr className="text-muted small">
@@ -179,6 +180,45 @@ function Cart() {
                                         })}
                                     </tbody>
                                 </table>
+                            </div>
+
+                            {/* Mobile Card View */}
+                            <div className="d-md-none mb-3">
+                                {cartItems.map((item) => {
+                                    const discount = getDiscount(item.product)
+                                    const originalPrice = getOriginalPrice(item.product_detail.price, discount)
+                                    return (
+                                        <div className="card shadow-sm mb-2 p-3 border-0" key={item.id}>
+                                            <div className="d-flex align-items-start gap-3">
+                                                <input type="checkbox" className="mt-2" checked={selectedIds.includes(item.id)} onChange={() => toggleSelect(item.id)} />
+                                                {item.product_detail.image && (
+                                                    <img src={item.product_detail.image} alt={item.product_detail.name} style={{ width: '65px', height: '65px', objectFit: 'contain' }} />
+                                                )}
+                                                <div className="flex-grow-1">
+                                                    <div className="d-flex justify-content-between align-items-start">
+                                                        <h6 className="fw-semibold mb-1 small">{item.product_detail.name}</h6>
+                                                        <button className="btn btn-sm text-danger p-0 ms-2" onClick={() => handleRemove(item.id)}>
+                                                            <i className="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div className="d-flex align-items-baseline gap-2 mb-2">
+                                                        <span className="fw-bold small">Rs. {item.product_detail.price}</span>
+                                                        <span className="text-muted text-decoration-line-through" style={{ fontSize: '11px' }}>Rs. {originalPrice}</span>
+                                                        <span className="badge" style={{ backgroundColor: '#fee2e2', color: '#991b1b', fontSize: '10px' }}>{discount}%</span>
+                                                    </div>
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <div className="d-flex align-items-center gap-2">
+                                                            <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => handleQuantityChange(item, -1)}>-</button>
+                                                            <span className="small fw-semibold">{item.quantity}</span>
+                                                            <button className="btn btn-sm btn-outline-secondary py-0 px-2" onClick={() => handleQuantityChange(item, 1)}>+</button>
+                                                        </div>
+                                                        <span className="fw-semibold small">Rs. {(item.product_detail.price * item.quantity).toFixed(2)}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center flex-wrap gap-2">
