@@ -8,6 +8,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -23,12 +24,15 @@ function Register() {
       return
     }
 
+    setLoading(true)
     try {
       await api.post('accounts/register/', formData)
       toast.success('Account created! Please log in.')
       navigate('/login')
     } catch (err) {
       setError('Registration failed. Username may already be taken.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -118,7 +122,18 @@ function Register() {
                     <input className="form-control" type={showPassword ? 'text' : 'password'} placeholder="Confirm your password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
                 </div>
               </div>
-              <button className="btn text-white w-100 py-2" style={{ backgroundColor: '#ea580c' }} type="submit">Create Account <i className="bi bi-arrow-right"></i></button>
+              <button className="btn text-white w-100 py-2" style={{ backgroundColor: '#ea580c' }} type="submit" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Creating Account...
+                  </>
+                ) : (
+                  <>
+                    Create Account <i className="bi bi-arrow-right"></i>
+                  </>
+                )}
+              </button>
             </form>
           </div>
         </div>

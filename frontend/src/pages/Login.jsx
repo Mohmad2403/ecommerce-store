@@ -6,6 +6,7 @@ function Login() {
   const [formData, setFormData] = useState({ username: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -15,6 +16,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
     try {
       const response = await api.post('accounts/login/', formData)
       localStorage.setItem('access_token', response.data.access)
@@ -27,6 +29,8 @@ function Login() {
       navigate('/')
     } catch (err) {
       setError('Invalid username or password.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -95,7 +99,18 @@ function Login() {
                     </span>
                 </div>
               </div>
-              <button className="btn text-white w-100 py-2" style={{ backgroundColor: '#ea580c' }} type="submit">Log In <i className="bi bi-arrow-right"></i></button>
+              <button className="btn text-white w-100 py-2" style={{ backgroundColor: '#ea580c' }} type="submit" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Logging in...
+                  </>
+                ) : (
+                  <>
+                    Log In <i className="bi bi-arrow-right"></i>
+                  </>
+                )}
+              </button>
             </form>
           </div>
         </div>
